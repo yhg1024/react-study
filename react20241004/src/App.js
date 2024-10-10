@@ -4,7 +4,6 @@ import Content from './Components/Content';
 import { useState } from "react";
 import { Modal } from './Components/Modal';
 
-
 function App() {
   
   const [foodList, setFoodList] = useState(
@@ -16,13 +15,15 @@ function App() {
   );
 
   const [openModal, setOpenModal] = useState(false);
-
+  const [reg, setReg] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [foodIs, setFoodIs] = useState('');
 
   return (
     <div className="App">
-      <Title setOpenModal={setOpenModal}/>
-      <Content foodList={foodList}/>  
-      {openModal && <Modal setOpenModal={setOpenModal} setFoodList={setFoodList}/>}  
+      <Title setOpenModal={setOpenModal} setReg={setReg}/>
+      <Content foodList={foodList} setFoodList={setFoodList} setOpenModal={setOpenModal} setEdit={setEdit} setFoodIs={setFoodIs}/>  
+      {openModal && <Modal foodList={foodList} setOpenModal={setOpenModal} setFoodList={setFoodList} reg={reg} edit={edit} setReg={setReg} setEdit={setEdit} foodIs={foodIs} setFoodIs={setFoodIs} />}  
     </div>
   );
 }
