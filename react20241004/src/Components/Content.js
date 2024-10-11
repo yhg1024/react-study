@@ -68,11 +68,11 @@ const Content = ({
   setRecomend,
 }) => {
   return (
-    <div>
+    <div className="menu contentCenter">
       {Object.keys(foodList).map((type) => (
         <div className="blogContent">
-          <div className="contentTitle">{type}</div>
-          <ul className="content">
+          <div className="subTitle">{type}</div>
+          <ul className="list">
             {foodList[type].map((food) => (
               <Food
                 food={food}
@@ -86,6 +86,7 @@ const Content = ({
               />
             ))}
           </ul>
+          <hr />
         </div>
       ))}
     </div>

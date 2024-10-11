@@ -3,6 +3,9 @@ import Title from "./Components/Title";
 import Content from "./Components/Content";
 import { useState } from "react";
 import { Modal } from "./Components/Modal";
+import { Routes, Route } from "react-router-dom";
+import { Login } from "./Components/Login";
+import { Mypage } from "./Components/Mypage";
 
 function App() {
   const [foodList, setFoodList] = useState({
@@ -20,15 +23,26 @@ function App() {
   return (
     <div className="App">
       <Title setOpenModal={setOpenModal} setReg={setReg} />
-      <Content
-        foodList={foodList}
-        setFoodList={setFoodList}
-        setOpenModal={setOpenModal}
-        setEdit={setEdit}
-        setFoodIs={setFoodIs}
-        recomend={recomend}
-        setRecomend={setRecomend}
-      />
+
+      <Routes>
+        <Route
+          path="/home"
+          element={
+            <Content
+              foodList={foodList}
+              setFoodList={setFoodList}
+              setOpenModal={setOpenModal}
+              setEdit={setEdit}
+              setFoodIs={setFoodIs}
+              recomend={recomend}
+              setRecomend={setRecomend}
+            />
+          }
+        ></Route>
+        <Route path="/mypage" element={<Mypage />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+      </Routes>
+
       {openModal && (
         <Modal
           foodList={foodList}
