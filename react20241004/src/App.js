@@ -3,6 +3,7 @@ import Title from "./Components/Title";
 import Content from "./Components/Content";
 import { Routes, Route } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
+import axios from "axios";
 import { Modal } from "./Components/Modal";
 import { Login } from "./Components/Login";
 import { Mypage } from "./Components/Mypage";
@@ -14,12 +15,14 @@ function App() {
   useEffect(() => {
     const getList = async () => {
       try {
-        const res = await axios.get("url");
-        set(res.data);
+        const res = await axios.get("http://localhost:8080/foodList");
+        setList(res.data); // axios는 응답 데이터가 res.data에 포함됨
       } catch (error) {
-        alert("검색 에러");
+        alert("검색 에러: " + error.message);
       }
     };
+
+    getList(); // getList 함수 호출
   }, []);
 
   const [foodList, setFoodList] = useState({
@@ -39,6 +42,7 @@ function App() {
 
   return (
     <div className="App">
+      {list}
       <Title
         setOpenModal={setOpenModal}
         setReg={setReg}
