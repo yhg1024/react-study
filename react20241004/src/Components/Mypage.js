@@ -1,3 +1,3 @@
-export function Mypage() {
-  return <div className="contentCenter">마이페이지입니다.</div>;
+export function Mypage({ formDataRef }) {
+  return <div className="contentCenter">{formDataRef.name}님 환영합니다.</div>;
 }

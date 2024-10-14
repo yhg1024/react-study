@@ -2,24 +2,33 @@ import "./App.css";
 import Title from "./Components/Title";
 import Content from "./Components/Content";
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Modal } from "./Components/Modal";
 import { Login } from "./Components/Login";
 import { Mypage } from "./Components/Mypage";
 import { Join } from "./Components/Join";
 
 function App() {
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    const getList = async () => {
+      try {
+        const res = await axios.get("url");
+        set(res.data);
+      } catch (error) {
+        alert("검색 에러");
+      }
+    };
+  }, []);
+
   const [foodList, setFoodList] = useState({
     한식: ["김밥", "불고기"],
     중식: ["짜장", "짬뽕"],
     일식: ["규동", "스시"],
   });
-  const [formData, setFormData] = useState({
-    id: "",
-    name: "",
-    password: "",
-    confirmPassword: "",
-  });
+
+  const formDataRef = useRef({ id: "", name: "", password: "" });
 
   const [openModal, setOpenModal] = useState(false);
   const [add, setAdd] = useState(true);
@@ -52,12 +61,12 @@ function App() {
             />
           }
         ></Route>
-        <Route path="/mypage" element={<Mypage />}></Route>
-        <Route path="/login" element={<Login formData={formData} />}></Route>
         <Route
-          path="/join"
-          element={<Join setFormData={setFormData} formData={formData} />}
+          path="/mypage"
+          element={<Mypage formDataRef={formDataRef} />}
         ></Route>
+        <Route path="/login" element={<Login formDataRef={formDataRef} />} />
+        <Route path="/join" element={<Join formDataRef={formDataRef} />} />
       </Routes>
 
       {openModal && (

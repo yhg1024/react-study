@@ -1,88 +1,85 @@
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-export function Join({ formData, setFormData }) {
+
+export function Join({ formDataRef }) {
   const navigate = useNavigate();
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-  const { id, name, password, confirmPassword } = formData;
+
+  const idRef = useRef();
+  const nameRef = useRef();
+  const passwordRef = useRef();
+  const confirmPasswordRef = useRef();
+
   const handleSubmit = (e) => {
-    validateId();
-    validatePassword();
-    navigate("/login");
+    e.preventDefault();
+    const id = idRef.current.value;
+    const name = nameRef.current.value;
+    const password = passwordRef.current.value;
+    const confirmPassword = confirmPasswordRef.current.value;
+
+    if (validateId(id) && validatePassword(password, confirmPassword)) {
+      formDataRef.current = { id, name, password }; // formData 업데이트
+      navigate("/login");
+    }
   };
 
-  // 아이디 유효성
-  const validateId = () => {
+  // 아이디 유효성 검사
+  const validateId = (id) => {
     const regex = /^[a-zA-Z0-9]{4,}$/;
-    if (formData.id === "test") {
+    if (id === "test") {
       alert("이미 있는 아이디입니다.");
-      formData.id = "";
-    } else if (!regex.test(formData.id)) {
+      idRef.current.value = ""; // 초기화
+      return false;
+    } else if (!regex.test(id)) {
       alert(
         "ID는 영문 또는 숫자로만 구성되어야 하며, 최소 4자 이상이어야 합니다."
       );
-      formData.id = "";
+      idRef.current.value = ""; // 초기화
+      return false;
     } else {
       alert("사용 가능한 아이디입니다.");
+      return true;
     }
   };
 
-  const isSame = formData.password === formData.confirmPassword;
-  // 비밀번호 유효성
-  const validatePassword = () => {
-    if (!isSame) {
+  // 비밀번호 유효성 검사
+  const validatePassword = (password, confirmPassword) => {
+    if (password !== confirmPassword) {
       alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
-      // 일치하지 않는 경우 초기화
-      formData.password = "";
-      formData.confirmPassword = "";
+      passwordRef.current.value = ""; // 초기화
+      confirmPasswordRef.current.value = ""; // 초기화
+      return false;
     }
+    return true;
   };
-
-  // 비밀번호와 비밀번호 확인 같은지 체크하기
 
   return (
     <div className="contentCenter">
       <h2 className="subTitle">회원가입</h2>
       <form onSubmit={handleSubmit}>
         <div className="form">
-          <label for="id">아이디 : </label>
-          <input
-            id="id"
-            name="id"
-            type="text"
-            value={id}
-            onChange={handleChange}
-          />
+          <label htmlFor="id">아이디 : </label>
+          <input id="id" name="id" type="text" ref={idRef} />
         </div>
         <div className="form">
-          <label for="name">이름 : </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            value={name}
-            onChange={handleChange}
-          />
+          <label htmlFor="name">이름 : </label>
+          <input id="name" name="name" type="text" ref={nameRef} />
         </div>
         <div className="form">
-          <label for="password">비밀번호 : </label>
+          <label htmlFor="password">비밀번호 : </label>
           <input
             id="password"
             name="password"
             type="password"
-            value={password}
-            onChange={handleChange}
+            ref={passwordRef}
           />
         </div>
         <div className="form">
-          <label for="confirmPassword">비밀번호 확인 : </label>
+          <label htmlFor="confirmPassword">비밀번호 확인 : </label>
           <input
             id="confirmPassword"
             name="confirmPassword"
             type="password"
-            value={confirmPassword}
-            onChange={handleChange}
+            ref={confirmPasswordRef}
           />
         </div>
         <button type="submit">회원가입</button>
