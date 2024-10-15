@@ -8,20 +8,24 @@ import { Modal } from "./Components/Modal";
 import { Login } from "./Components/Login";
 import { Mypage } from "./Components/Mypage";
 import { Join } from "./Components/Join";
+import { DataBase } from "./Components/DataBase";
 
 function App() {
   const [list, setList] = useState([]);
 
-  useEffect(() => {
-    const getList = async () => {
-      try {
-        const res = await axios.get("http://localhost:8080/foodList");
-        setList(res.data); // axios는 응답 데이터가 res.data에 포함됨
-      } catch (error) {
+  const url = "http://localhost:8080/dataBase";
+  const getList = async () => {
+    axios
+      .get(url)
+      .then((res) => {
+        setList(res.data);
+        console.log("응답 완료 : ", res.data);
+      })
+      .catch((error) => {
         alert("검색 에러: " + error.message);
-      }
-    };
-
+      });
+  };
+  useEffect(() => {
     getList(); // getList 함수 호출
   }, []);
 
@@ -42,7 +46,6 @@ function App() {
 
   return (
     <div className="App">
-      {list}
       <Title
         setOpenModal={setOpenModal}
         setReg={setReg}
@@ -51,6 +54,7 @@ function App() {
       />
 
       <Routes>
+        <Route path="/foodList" element={<DataBase list={list} />}></Route>
         <Route
           path="/home"
           element={
