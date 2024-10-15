@@ -8,7 +8,7 @@ import { Modal } from "./Components/Modal";
 import { Login } from "./Components/Login";
 import { Mypage } from "./Components/Mypage";
 import { Join } from "./Components/Join";
-import { DataBase } from "./Components/DataBase";
+import { CartList } from "./Components/CartList";
 
 function App() {
   const [list, setList] = useState([]);
@@ -52,9 +52,9 @@ function App() {
         add={add}
         setAdd={setAdd}
       />
-
       <Routes>
-        <Route path="/foodList" element={<DataBase list={list} />}></Route>
+        <Route path="/foodList" element={<CartList list={list} />}></Route>
+
         <Route
           path="/home"
           element={

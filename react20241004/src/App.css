@@ -189,8 +189,14 @@ a {
 .form input {
   margin: 0 25px;
 }
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
 
-.food-item {
+.food-item,
+.cartprice {
   background-color: #ffffff; /* 카드 배경색 */
   border-radius: 15px; /* 둥근 모서리 */
   border: solid 1px gray;
