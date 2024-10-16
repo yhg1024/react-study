@@ -8,25 +8,51 @@ import { Modal } from "./Components/Modal";
 import { Login } from "./Components/Login";
 import { Mypage } from "./Components/Mypage";
 import { Join } from "./Components/Join";
-import { CartList } from "./Components/CartList";
+import CartList1 from "./Components/CartList1";
 
 function App() {
-  const [list, setList] = useState([]);
+  const [korList, setKorList] = useState([]);
+  const [chaList, setChaList] = useState([]);
+  const [jpaList, setJpaList] = useState([]);
 
-  const url = "http://localhost:8080/dataBase";
-  const getList = async () => {
+  const getKorList = async () => {
     axios
-      .get(url)
+      .get("http://localhost:8080/foodListKor")
       .then((res) => {
-        setList(res.data);
+        setKorList(res.data);
         console.log("응답 완료 : ", res.data);
       })
       .catch((error) => {
         alert("검색 에러: " + error.message);
       });
   };
+  const getChaList = async () => {
+    axios
+      .get("http://localhost:8080/foodListCha")
+      .then((res) => {
+        setChaList(res.data);
+        console.log("응답 완료 : ", res.data);
+      })
+      .catch((error) => {
+        alert("검색 에러: " + error.message);
+      });
+  };
+  const getJpaList = async () => {
+    axios
+      .get("http://localhost:8080/foodListJpa")
+      .then((res) => {
+        setJpaList(res.data);
+        console.log("응답 완료 : ", res.data);
+      })
+      .catch((error) => {
+        alert("검색 에러: " + error.message);
+      });
+  };
+
   useEffect(() => {
-    getList(); // getList 함수 호출
+    getKorList(); // getList 함수 호출
+    getChaList();
+    getJpaList();
   }, []);
 
   const [foodList, setFoodList] = useState({
@@ -53,7 +79,12 @@ function App() {
         setAdd={setAdd}
       />
       <Routes>
-        <Route path="/foodList" element={<CartList list={list} />}></Route>
+        <Route
+          path="/foodList"
+          element={
+            <CartList1 korList={korList} chaList={chaList} jpaList={jpaList} />
+          }
+        ></Route>
 
         <Route
           path="/home"

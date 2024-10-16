@@ -189,44 +189,101 @@ a {
 .form input {
   margin: 0 25px;
 }
-.menu {
+.cartLIst {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.food-item,
-.cartprice {
-  background-color: #ffffff; /* 카드 배경색 */
-  border-radius: 15px; /* 둥근 모서리 */
-  border: solid 1px gray;
+  justify-content: space-around; /* 메뉴 항목 간의 공간을 균등하게 분배 */
   margin: 20px;
-  padding: 20px;
-  width: 400px; /* 카드 너비를 늘림 */
-  text-align: left; /* 텍스트 왼쪽 정렬 */
-  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  flex-direction: column;
 }
 
-.food-item h3 {
-  font-size: 1.6em; /* 제목 크기 */
-  margin: 10px 0;
-  color: #333; /* 제목 색상 */
-  font-family: "Arial", sans-serif; /* 폰트 스타일 */
+.menuList {
+  display: flex;
 }
 
-.food-item p {
+.menu {
+  flex: 1; /* 각 메뉴가 동일한 비율로 공간을 차지하도록 설정 */
+  margin: 0 10px; /* 좌우 여백 */
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.menu h1,
+.cart h1,
+.price h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.menu div {
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  transition: box-shadow 0.3s;
+}
+
+.menu div:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.menu h2 {
+  font-size: 20px;
+  color: #555;
+}
+.menu h2 span {
+  font-size: 15px;
+}
+
+.menu p {
+  font-size: 16px;
+  color: #777;
   margin: 5px 0;
-  font-size: 1em; /* 설명 크기 */
-  color: #666; /* 설명 색상 */
 }
 
-.food-item .price {
-  font-weight: bold; /* 가격 강조 */
-  color: #e74c3c; /* 가격 색상 */
-  font-size: 1.2em; /* 가격 크기 */
+.item {
+  display: flex;
+  justify-content: space-between;
 }
 
-.food-item .good {
-  color: #3498db; /* 좋아요 수 색상 */
-  font-size: 0.9em; /* 좋아요 수 크기 */
+.cart,
+.price {
+  margin: 0 10px;
+}
+.price {
+  padding-top: 30px;
+}
+.tableH {
+  display: flex;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  transition: box-shadow 0.3s;
+  padding: 15px;
+  justify-content: space-evenly;
+}
+
+.cartItem {
+  display: flex;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  transition: box-shadow 0.3s;
+  padding: 15px;
+  justify-content: space-evenly;
+}
+
+.count > span {
+  border: 1px solid #777;
+  margin: 10px;
+  padding: 3px;
 }
