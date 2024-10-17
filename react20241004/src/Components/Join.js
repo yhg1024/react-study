@@ -82,7 +82,9 @@ export function Join({ formDataRef }) {
             ref={confirmPasswordRef}
           />
         </div>
-        <button type="submit">회원가입</button>
+        <button className="button" type="submit">
+          회원가입
+        </button>
       </form>
     </div>
   );

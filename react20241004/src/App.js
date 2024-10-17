@@ -9,6 +9,9 @@ import { Login } from "./Components/Login";
 import { Mypage } from "./Components/Mypage";
 import { Join } from "./Components/Join";
 import CartList1 from "./Components/CartList1";
+import { OrderList } from "./Components/OrderList";
+import { Admin } from "./Components/Admin";
+import { FoodModal } from "./Components/FoodModal";
 
 function App() {
   const [korList, setKorList] = useState([]);
@@ -49,6 +52,44 @@ function App() {
       });
   };
 
+  const [foodData, setFoodData] = useState({
+    code: "",
+    price: "",
+    description: "",
+    id: "",
+    good: "",
+    food: "",
+  });
+
+  const insertFood = async () => {
+    if (foodData.code == "한식" && foodData.code == "kor") {
+      setFoodData((foodData.code = "kor"));
+    } else if (foodData.code == "중식" && foodData.code == "cha") {
+      setFoodData((foodData.code = "cha"));
+    } else if (foodData.code == "일식" && foodData.code == "jpa") {
+      setFoodData((foodData.code = "jpa"));
+    } else {
+      alert("음식 종류를 바르게 입력해주세요.");
+    }
+    axios
+      .post("http://localhost:8080/insertFood", foodData)
+      .then((res) => {
+        alert("성공");
+        getKorList(); // getList 함수 호출
+        getChaList();
+        getJpaList();
+      })
+      .catch((error) => {
+        alert("error는 " + error);
+      });
+  };
+
+  const updateFood = async () => {
+    axios.post("http://localhost:8080/updateFood", foodData).then((res) => {
+      alert("성공");
+    });
+  };
+
   useEffect(() => {
     getKorList(); // getList 함수 호출
     getChaList();
@@ -64,11 +105,15 @@ function App() {
   const formDataRef = useRef({ id: "", name: "", password: "" });
 
   const [openModal, setOpenModal] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   const [add, setAdd] = useState(true);
   const [reg, setReg] = useState(false);
   const [edit, setEdit] = useState(false);
   const [foodIs, setFoodIs] = useState("");
   const [recomend, setRecomend] = useState(0);
+  const [shoppingList, setShoppingList] = useState([]);
+  const [count, setCount] = useState([]); // 초기화 시 빈 배열
+  const [totalPrice, setTotalPrice] = useState(0);
 
   return (
     <div className="App">
@@ -77,12 +122,23 @@ function App() {
         setReg={setReg}
         add={add}
         setAdd={setAdd}
+        isLogin={isLogin}
       />
       <Routes>
         <Route
           path="/foodList"
           element={
-            <CartList1 korList={korList} chaList={chaList} jpaList={jpaList} />
+            <CartList1
+              korList={korList}
+              chaList={chaList}
+              jpaList={jpaList}
+              shoppingList={shoppingList}
+              setShoppingList={setShoppingList}
+              count={count}
+              setCount={setCount}
+              totalPrice={totalPrice}
+              setTotalPrice={setTotalPrice}
+            />
           }
         ></Route>
 
@@ -104,23 +160,65 @@ function App() {
           path="/mypage"
           element={<Mypage formDataRef={formDataRef} />}
         ></Route>
-        <Route path="/login" element={<Login formDataRef={formDataRef} />} />
+        <Route
+          path="/login"
+          element={<Login formDataRef={formDataRef} setIsLogin={setIsLogin} />}
+        />
         <Route path="/join" element={<Join formDataRef={formDataRef} />} />
+        <Route
+          path="/order"
+          element={
+            <OrderList
+              shoppingList={shoppingList}
+              setShoppingList={setShoppingList}
+              count={count}
+              setCount={setCount}
+              totalPrice={totalPrice}
+              setTotalPrice={setTotalPrice}
+              isLogin={isLogin}
+            />
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <Admin
+              korList={korList}
+              chaList={chaList}
+              jpaList={jpaList}
+              setOpenModal={setOpenModal}
+              reg={reg}
+              edit={edit}
+              setReg={setReg}
+              setEdit={setEdit}
+            />
+          }
+        />
       </Routes>
 
       {openModal && (
-        <Modal
-          foodList={foodList}
+        <FoodModal
           setOpenModal={setOpenModal}
-          setFoodList={setFoodList}
-          reg={reg}
           edit={edit}
-          setReg={setReg}
           setEdit={setEdit}
-          foodIs={foodIs}
-          setFoodIs={setFoodIs}
-          setRecomend={setRecomend}
+          reg={reg}
+          setReg={setReg}
+          insertFood={insertFood}
+          foodData={foodData}
+          setFoodData={setFoodData}
         />
+        // <Modal
+        //   foodList={foodList}
+        //   setOpenModal={setOpenModal}
+        //   setFoodList={setFoodList}
+        //   reg={reg}
+        //   edit={edit}
+        //   setReg={setReg}
+        //   setEdit={setEdit}
+        //   foodIs={foodIs}
+        //   setFoodIs={setFoodIs}
+        //   setRecomend={setRecomend}
+        // />
       )}
     </div>
   );

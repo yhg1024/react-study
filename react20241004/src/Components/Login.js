@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export function Login({ formDataRef }) {
+export function Login({ formDataRef, setIsLogin }) {
   const navigate = useNavigate();
   const formData = formDataRef.current;
 
@@ -12,8 +12,14 @@ export function Login({ formDataRef }) {
     const id = idRef.current.value;
     const password = passwordRef.current.value;
 
-    if (formData.id === id && formData.password === password) {
-      navigate("/home");
+    if (
+      id !== "" &&
+      password !== "" &&
+      formData.id === id &&
+      formData.password === password
+    ) {
+      setIsLogin(true);
+      navigate("/foodList");
     } else {
       alert("아이디와 비밀번호를 확인하세요.");
     }
@@ -31,7 +37,21 @@ export function Login({ formDataRef }) {
           <label htmlFor="password">비밀번호 : </label>
           <input id="password" type="password" ref={passwordRef} />
         </div>
-        <button onClick={login}>로그인</button>
+        <button
+          className="button"
+          onClick={login}
+          style={{ marginRight: "10px" }}
+        >
+          로그인
+        </button>
+        <button
+          className="button"
+          onClick={() => {
+            navigate("/join");
+          }}
+        >
+          회원가입
+        </button>
       </div>
     </div>
   );

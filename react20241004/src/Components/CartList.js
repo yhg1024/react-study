@@ -1,8 +1,7 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 export function CartList({ list }) {
   const [count, setCount] = useState([0, 0, 0]);
   const [totalPrice, setTotalPrice] = useState(null);
-  const totalPriceRef = useRef;
   return (
     <div className="menu">
       <div className="cartlist">
