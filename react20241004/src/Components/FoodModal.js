@@ -17,6 +17,7 @@ export const FoodModal = ({
     } else if (type === "edit") {
       updateFood();
     }
+    setFoodData([]);
     setOpenModal(false);
     setEdit(false);
     setReg(false);
@@ -42,7 +43,7 @@ export const FoodModal = ({
     <div className="modal">
       <div className="modal_popup">
         <div>
-          <label htmlFor="code">코드:</label>
+          <label htmlFor="code">코드: </label>
           <input
             type="text"
             id="code"
@@ -53,7 +54,7 @@ export const FoodModal = ({
           />
         </div>
         <div>
-          <label htmlFor="price">가격:</label>
+          <label htmlFor="price">가격: </label>
           <input
             type="number"
             id="price"
@@ -64,7 +65,7 @@ export const FoodModal = ({
           />
         </div>
         <div>
-          <label htmlFor="description">설명:</label>
+          <label htmlFor="description">설명: </label>
           <input
             type="text"
             id="description"
@@ -75,7 +76,7 @@ export const FoodModal = ({
           />
         </div>
         <div>
-          <label htmlFor="good">좋아요 수:</label>
+          <label htmlFor="good">좋아요 수: </label>
           <input
             type="number"
             id="good"
@@ -86,7 +87,7 @@ export const FoodModal = ({
           />
         </div>
         <div>
-          <label htmlFor="food">음식 이름:</label>
+          <label htmlFor="food">음식 이름: </label>
           <input
             type="text"
             id="food"

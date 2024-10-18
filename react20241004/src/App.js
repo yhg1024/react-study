@@ -14,37 +14,13 @@ import { Admin } from "./Components/Admin";
 import { FoodModal } from "./Components/FoodModal";
 
 function App() {
-  const [korList, setKorList] = useState([]);
-  const [chaList, setChaList] = useState([]);
-  const [jpaList, setJpaList] = useState([]);
+  const [foodList, setFoodList] = useState([]);
 
-  const getKorList = async () => {
+  const getFoodList = async () => {
     axios
-      .get("http://localhost:8080/foodListKor")
+      .get("http://localhost:8080/foodList")
       .then((res) => {
-        setKorList(res.data);
-        console.log("응답 완료 : ", res.data);
-      })
-      .catch((error) => {
-        alert("검색 에러: " + error.message);
-      });
-  };
-  const getChaList = async () => {
-    axios
-      .get("http://localhost:8080/foodListCha")
-      .then((res) => {
-        setChaList(res.data);
-        console.log("응답 완료 : ", res.data);
-      })
-      .catch((error) => {
-        alert("검색 에러: " + error.message);
-      });
-  };
-  const getJpaList = async () => {
-    axios
-      .get("http://localhost:8080/foodListJpa")
-      .then((res) => {
-        setJpaList(res.data);
+        setFoodList(res.data);
         console.log("응답 완료 : ", res.data);
       })
       .catch((error) => {
@@ -75,9 +51,7 @@ function App() {
       .post("http://localhost:8080/insertFood", foodData)
       .then((res) => {
         alert(foodData.code);
-        getKorList(); // getList 함수 호출
-        getChaList();
-        getJpaList();
+        getFoodList();
       })
       .catch((error) => {
         alert("error는 " + error);
@@ -89,9 +63,7 @@ function App() {
       .post("http://localhost:8080/updateFood")
       .then((res) => {
         alert("성공");
-        getKorList();
-        getChaList();
-        getJpaList();
+        getFoodList();
       })
       .catch((error) => {
         alert("error는 " + error);
@@ -104,9 +76,7 @@ function App() {
       .post("http://localhost:8080/deleteFood", param)
       .then((res) => {
         alert("성공");
-        getKorList();
-        getChaList();
-        getJpaList();
+        getFoodList();
       })
       .catch((error) => {
         alert("error는 " + error);
@@ -114,16 +84,14 @@ function App() {
   };
 
   useEffect(() => {
-    getKorList(); // getList 함수 호출
-    getChaList();
-    getJpaList();
+    getFoodList();
   }, []);
 
-  const [foodList, setFoodList] = useState({
-    한식: ["김밥", "불고기"],
-    중식: ["짜장", "짬뽕"],
-    일식: ["규동", "스시"],
-  });
+  // const [foodList, setFoodList] = useState({
+  //   한식: ["김밥", "불고기"],
+  //   중식: ["짜장", "짬뽕"],
+  //   일식: ["규동", "스시"],
+  // });
 
   const formDataRef = useRef({ id: "", name: "", password: "" });
 
@@ -152,15 +120,13 @@ function App() {
           path="/foodList"
           element={
             <CartList1
-              korList={korList}
-              chaList={chaList}
-              jpaList={jpaList}
               shoppingList={shoppingList}
               setShoppingList={setShoppingList}
               count={count}
               setCount={setCount}
               totalPrice={totalPrice}
               setTotalPrice={setTotalPrice}
+              foodList={foodList}
             />
           }
         ></Route>
@@ -206,9 +172,7 @@ function App() {
           path="/admin"
           element={
             <Admin
-              korList={korList}
-              chaList={chaList}
-              jpaList={jpaList}
+              foodList={foodList}
               setOpenModal={setOpenModal}
               reg={reg}
               edit={edit}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            let data = { num : [10,20,30,40,50]};
+            let result = data.num.reduce((sum, current) => sum + current , 0);
+            console.log(result);
+
+            document.querySelector('.btn').addEventListener('click', function() {
+                setTimeout(function(){
+                    console.log("javascript es6");
+                }, 2000);   
+        })
+
+        
+
+        for (let i = 0; i < 5; i++) { 
+            setTimeout(function() { console.log(i); }, i*1000 ); 
+        }
+
+        const btn1 = document.querySelector('.btn1');   
+        const btn2 = document.querySelector('.btn2');   
+        const btn3 = document.querySelector('.btn3');   
+        const modal1 = document.querySelector('.modal1');   
+        const modal2 = document.querySelector('.modal2');   
+        const modal3 = document.querySelector('.modal3');   
+
+        btn1.addEventListener('click', ()=>{
+            modal1.style.display = 'block';
+        })
+        btn2.addEventListener('click', ()=>{
+            modal2.style.display = 'block';
+        })
+        btn3.addEventListener('click', ()=>{
+            modal3.style.display = 'block';
+        })
+
+        var a = [1,2,3];
+        var b = '김밥';
+
+        console.log(b[0] + a + b[1])
+
+        var a = [1,2,3];
+        var b = ['you', 'are'];
+        var c = function(a,b){
+            console.log( [[...a], ...[...b]][1] )
+        }
+        c(a,b);
+
+        // 배열 [] 안에 [...a] 뒤에 , 를 넣은거 뒤에는 push랑 같은 기능을 하는데
+        // 배열안에 [...a], you, are이 들어가므로 배열의 [1]은 you가 된다.
+
+        function 함수(a = 5, b = a * 2 ){
+            console.log(a + b);
+            return 10
+        }
+        함수(3);
+
+        // 함수에 값을 하나 넣어서 a = 3이 되고 b는 기본값인 a*2가 되므로 6이다.
+        // 3 + 6 해서 9가 된다.
+
+        function arr(...result){
+            return result;
+        }
+        var newArray = arr(1,2,3,4,5);
+        console.log(newArray); 
+
+        var numbers = [4, 6, 1, 2, 3, 3, 4, 5, 9];
+
+        console.log(Math.max(...numbers))
+
+        var data1 = 'orange';
+        console.log([...data1].sort())
+    };        
+    </script>
+</head>
+<body>
+    <button class="btn">버튼</button>
+
+    <div class="modal1" style="display : none">모달창0</div>
+    <div class="modal2" style="display : none">모달창1</div>
+    <div class="modal3" style="display : none">모달창2</div>
+
+    <button class="btn1">버튼0</button>
+    <button class="btn2">버튼1</button>
+    <button class="btn3">버튼2</button>
+    <input type = "radio" id="java"><label for="java">자바</label>
+    <div>웹 개발에 사용되는 언어는 <sapn style="color: red; text-decoration: underline; font-style: italic;">JAVA, PYTHON, PHP, JSP</sapn> 등이 있다.</div>
+</body>
+</html>

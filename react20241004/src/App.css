@@ -320,3 +320,13 @@ a {
   background-color: #ccc; /* 비활성화된 버튼 색상 */
   cursor: not-allowed; /* 비활성화된 커서 모양 */
 }
+
+.listWrap {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.listWrap .item {
+  margin: 10px;
+}

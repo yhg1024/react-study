@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.onload = function () {
+        const arr = [
+          "서울",
+          "인천",
+          "경기",
+          "강원",
+          "부산",
+          "대전",
+          "전남",
+          "경북",
+          "전북",
+        ];
+        const selectAll = document.querySelector("#selectAll");
+        const listLength = arr.length;
+        arr.map((arr, i) => {
+          let input = document.createElement("input");
+          let label = document.createElement("label");
+          input.setAttribute("type", "checkbox");
+          input.setAttribute("class", "checkBox");
+          input.setAttribute("id", arr);
+          input.setAttribute("value", arr);
+          label.setAttribute("for", arr);
+          label.innerText = arr;
+          document.querySelector(".checkBoxs").append(input);
+          document.querySelector(".checkBoxs").append(label);
+
+          // 전체 체크
+          // querySelector() :  첫 번째 element를 반환
+          const checkBox = document.querySelector("#" + arr);
+          selectAll.addEventListener("click", () => {
+            if (selectAll.checked) {
+              checkBox.checked = true;
+            } else {
+              checkBox.checked = false;
+            }
+          });
+
+          // 체크박스가 모두 체크 안되어 있으면 전체 체크 풀기
+          checkBox.addEventListener("click", () => {
+            const chkLength =
+              document.querySelectorAll(".checkBox:checked").length;
+            if (chkLength < listLength) {
+              selectAll.checked = false;
+            } else if (chkLength == listLength) {
+              selectAll.checked = true;
+            }
+          });
+        });
+        // checked List
+        const btn = document.querySelector(".btn");
+        btn.addEventListener("click", () => {
+          // chkList의 기존 span 요소 삭제
+          const chkList = document.querySelector(".chkList");
+          chkList.innerHTML = ""; // 기존 내용을 비웁니다.
+
+          const chk = document.querySelectorAll(".checkBox:checked");
+          const chkListValues = Array.from(chk).map(
+            (checkbox) => checkbox.value
+          );
+
+          if (chkListValues.length > 0) {
+            const list = document.createElement("span");
+            list.setAttribute("class", "span");
+            list.innerHTML = chkListValues.join(", "); // 배열을 문자열로 변환
+            chkList.append(list);
+          }
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <input type="checkbox" name="cities" value="selectAll" id="selectAll" />
+    <label for="selectAll"><b>전체</b></label>
+    <input type="button" class="btn" value="버튼" /><br />
+    <div class="checkBoxs"></div>
+    <div class="chkList"></div>
+  </body>
+</html>

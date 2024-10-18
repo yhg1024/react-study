@@ -3,15 +3,11 @@ import { OrderList } from "./OrderList";
 import { Link } from "react-router-dom";
 
 const CartList1 = ({
-  korList,
-  chaList,
-  jpaList,
+  foodList,
   shoppingList,
   setShoppingList,
   count,
   setCount,
-  totalPrice,
-  setTotalPrice,
 }) => {
   const handleAddToCart = (item) => {
     // 장바구니 추가를 누른 아이템이 장바구니에 있는 것이랑 findIndex로 찾아서 동일한지 확인
@@ -38,48 +34,54 @@ const CartList1 = ({
       <div className="menuList">
         <div className="menu">
           <h1>한식</h1>
-          {korList.map((item, i) => {
-            return (
-              <div className="item" key={i}>
-                <h2>
-                  {item.food}
-                  <span>{item.good}❤️</span>
-                </h2>
-                <p>{item.price}원</p>
-                <button onClick={() => handleAddToCart(item)}>🛒</button>
-              </div>
-            );
-          })}
+          {foodList
+            .filter((item) => item.code === "kor")
+            .map((item, i) => {
+              return (
+                <div className="item" key={i}>
+                  <h2>
+                    {item.food}
+                    <span>{item.good}❤️</span>
+                  </h2>
+                  <p>{item.price}원</p>
+                  <button onClick={() => handleAddToCart(item)}>🛒</button>
+                </div>
+              );
+            })}
         </div>
         <div className="menu">
           <h1>중식</h1>
-          {chaList.map((item, i) => {
-            return (
-              <div className="item" key={i}>
-                <h2>
-                  {item.food}
-                  <span>{item.good}❤️</span>
-                </h2>
-                <p>{item.price}원</p>
-                <button onClick={() => handleAddToCart(item)}>🛒</button>
-              </div>
-            );
-          })}
+          {foodList
+            .filter((item) => item.code === "cha")
+            .map((item, i) => {
+              return (
+                <div className="item" key={i}>
+                  <h2>
+                    {item.food}
+                    <span>{item.good}❤️</span>
+                  </h2>
+                  <p>{item.price}원</p>
+                  <button onClick={() => handleAddToCart(item)}>🛒</button>
+                </div>
+              );
+            })}
         </div>
         <div className="menu">
           <h1>일식</h1>
-          {jpaList.map((item, i) => {
-            return (
-              <div className="item" key={i}>
-                <h2>
-                  {item.food}
-                  <span>{item.good}❤️</span>
-                </h2>
-                <p>{item.price}원</p>
-                <button onClick={() => handleAddToCart(item)}>🛒</button>
-              </div>
-            );
-          })}
+          {foodList
+            .filter((item) => item.code === "jpa")
+            .map((item, i) => {
+              return (
+                <div className="item" key={i}>
+                  <h2>
+                    {item.food}
+                    <span>{item.good}❤️</span>
+                  </h2>
+                  <p>{item.price}원</p>
+                  <button onClick={() => handleAddToCart(item)}>🛒</button>
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>
