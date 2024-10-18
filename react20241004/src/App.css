@@ -226,7 +226,7 @@ a {
   margin-bottom: 10px;
 }
 
-.menu div {
+.menu .item {
   background-color: #f1f1f1;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -235,7 +235,7 @@ a {
   transition: box-shadow 0.3s;
 }
 
-.menu div:hover {
+.menu .item:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -255,6 +255,10 @@ a {
 .item {
   display: flex;
   justify-content: space-between;
+}
+
+.item div {
+  display: flex;
 }
 
 .cart,

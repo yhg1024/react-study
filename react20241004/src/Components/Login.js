@@ -11,12 +11,14 @@ export function Login({ formDataRef, setIsLogin }) {
   const login = () => {
     const id = idRef.current.value;
     const password = passwordRef.current.value;
+    console.log(sessionStorage.getItem(id));
+    console.log(sessionStorage.getItem(password));
 
     if (
       id !== "" &&
       password !== "" &&
-      formData.id === id &&
-      formData.password === password
+      id === sessionStorage.getItem(id) &&
+      password === sessionStorage.getItem(password)
     ) {
       setIsLogin(true);
       navigate("/foodList");

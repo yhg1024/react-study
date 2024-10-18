@@ -5,6 +5,8 @@ export const Admin = ({
   setOpenModal,
   edit,
   setEdit,
+  setFoodData,
+  deleteFood,
 }) => {
   return (
     <div>
@@ -14,16 +16,31 @@ export const Admin = ({
           {korList.map((item, i) => {
             return (
               <div className="item" key={i}>
-                <h2
-                  onClick={() => {
-                    setOpenModal(true);
-                    setEdit(true);
-                  }}
-                >
-                  {item.food}
-                  <span>{item.good}❤️</span>
-                </h2>
-                <p>{item.price}원</p>
+                <div>
+                  <h2>
+                    {item.food}
+                    <span>{item.good}❤️</span>
+                  </h2>
+                  <p>{item.price}원</p>
+                </div>
+                <div>
+                  <button
+                    onClick={() => {
+                      setFoodData(item);
+                      setOpenModal(true);
+                      setEdit(true);
+                    }}
+                  >
+                    수정
+                  </button>
+                  <button
+                    onClick={() => {
+                      deleteFood(item);
+                    }}
+                  >
+                    삭제
+                  </button>
+                </div>
               </div>
             );
           })}
@@ -33,11 +50,30 @@ export const Admin = ({
           {chaList.map((item, i) => {
             return (
               <div className="item" key={i}>
-                <h2>
-                  {item.food}
-                  <span>{item.good}❤️</span>
-                </h2>
-                <p>{item.price}원</p>
+                <div>
+                  <h2>
+                    {item.food}
+                    <span>{item.good}❤️</span>
+                  </h2>
+                  <p>{item.price}원</p>
+                </div>
+                <div>
+                  <button
+                    onClick={() => {
+                      setOpenModal(true);
+                      setEdit(true);
+                    }}
+                  >
+                    수정
+                  </button>
+                  <button
+                    onClick={() => {
+                      deleteFood(item);
+                    }}
+                  >
+                    삭제
+                  </button>
+                </div>
               </div>
             );
           })}
@@ -47,11 +83,30 @@ export const Admin = ({
           {jpaList.map((item, i) => {
             return (
               <div className="item" key={i}>
-                <h2>
-                  {item.food}
-                  <span>{item.good}❤️</span>
-                </h2>
-                <p>{item.price}원</p>
+                <div>
+                  <h2>
+                    {item.food}
+                    <span>{item.good}❤️</span>
+                  </h2>
+                  <p>{item.price}원</p>
+                </div>
+                <div>
+                  <button
+                    onClick={() => {
+                      setOpenModal(true);
+                      setEdit(true);
+                    }}
+                  >
+                    수정
+                  </button>
+                  <button
+                    onClick={() => {
+                      deleteFood(item.id);
+                    }}
+                  >
+                    삭제
+                  </button>
+                </div>
               </div>
             );
           })}

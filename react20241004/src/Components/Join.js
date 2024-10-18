@@ -18,6 +18,8 @@ export function Join({ formDataRef }) {
 
     if (validateId(id) && validatePassword(password, confirmPassword)) {
       formDataRef.current = { id, name, password }; // formData 업데이트
+      sessionStorage.setItem(id, formDataRef.current.id);
+      sessionStorage.setItem(password, formDataRef.current.password);
       navigate("/login");
     }
   };

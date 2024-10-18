@@ -62,11 +62,11 @@ function App() {
   });
 
   const insertFood = async () => {
-    if (foodData.code == "한식" && foodData.code == "kor") {
+    if (foodData.code == "한식" || foodData.code == "kor") {
       setFoodData((foodData.code = "kor"));
-    } else if (foodData.code == "중식" && foodData.code == "cha") {
+    } else if (foodData.code == "중식" || foodData.code == "cha") {
       setFoodData((foodData.code = "cha"));
-    } else if (foodData.code == "일식" && foodData.code == "jpa") {
+    } else if (foodData.code == "일식" || foodData.code == "jpa") {
       setFoodData((foodData.code = "jpa"));
     } else {
       alert("음식 종류를 바르게 입력해주세요.");
@@ -74,7 +74,7 @@ function App() {
     axios
       .post("http://localhost:8080/insertFood", foodData)
       .then((res) => {
-        alert("성공");
+        alert(foodData.code);
         getKorList(); // getList 함수 호출
         getChaList();
         getJpaList();
@@ -85,9 +85,32 @@ function App() {
   };
 
   const updateFood = async () => {
-    axios.post("http://localhost:8080/updateFood", foodData).then((res) => {
-      alert("성공");
-    });
+    axios
+      .post("http://localhost:8080/updateFood")
+      .then((res) => {
+        alert("성공");
+        getKorList();
+        getChaList();
+        getJpaList();
+      })
+      .catch((error) => {
+        alert("error는 " + error);
+      });
+  };
+
+  const deleteFood = async (param) => {
+    console.log(param);
+    axios
+      .post("http://localhost:8080/deleteFood", param)
+      .then((res) => {
+        alert("성공");
+        getKorList();
+        getChaList();
+        getJpaList();
+      })
+      .catch((error) => {
+        alert("error는 " + error);
+      });
   };
 
   useEffect(() => {
@@ -191,6 +214,8 @@ function App() {
               edit={edit}
               setReg={setReg}
               setEdit={setEdit}
+              setFoodData={setFoodData}
+              deleteFood={deleteFood}
             />
           }
         />
@@ -204,6 +229,7 @@ function App() {
           reg={reg}
           setReg={setReg}
           insertFood={insertFood}
+          updateFood={updateFood}
           foodData={foodData}
           setFoodData={setFoodData}
         />

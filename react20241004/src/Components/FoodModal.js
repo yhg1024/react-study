@@ -7,6 +7,7 @@ export const FoodModal = ({
   edit,
   setEdit,
   insertFood,
+  updateFood,
   setFoodData,
   foodData,
 }) => {
@@ -14,6 +15,7 @@ export const FoodModal = ({
     if (type === "reg") {
       insertFood();
     } else if (type === "edit") {
+      updateFood();
     }
     setOpenModal(false);
     setEdit(false);
