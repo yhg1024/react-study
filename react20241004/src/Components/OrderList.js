@@ -42,7 +42,8 @@ export const OrderList = ({
   }, [shoppingList, count]); //  shoppingList나 count가 변경될 때마다 실행
 
   const order = () => {
-    if (isLogin !== true) {
+    console.log("order" + sessionStorage.getItem(isLogin));
+    if (sessionStorage.getItem(isLogin) !== true) {
       alert("로그인 하세요.");
       navigate("/login");
     } else {

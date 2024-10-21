@@ -151,7 +151,13 @@ function App() {
         ></Route>
         <Route
           path="/login"
-          element={<Login formDataRef={formDataRef} setIsLogin={setIsLogin} />}
+          element={
+            <Login
+              formDataRef={formDataRef}
+              setIsLogin={setIsLogin}
+              isLogin={isLogin}
+            />
+          }
         />
         <Route path="/join" element={<Join formDataRef={formDataRef} />} />
         <Route

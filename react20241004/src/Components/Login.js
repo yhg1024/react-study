@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export function Login({ formDataRef, setIsLogin }) {
+export function Login({ formDataRef, setIsLogin, isLogin }) {
   const navigate = useNavigate();
   const formData = formDataRef.current;
 
@@ -13,6 +13,7 @@ export function Login({ formDataRef, setIsLogin }) {
     const password = passwordRef.current.value;
     console.log(sessionStorage.getItem(id));
     console.log(sessionStorage.getItem(password));
+    sessionStorage.setItem(isLogin, true);
 
     if (
       id !== "" &&
