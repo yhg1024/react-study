@@ -20,6 +20,7 @@ export function Join({ formDataRef }) {
       formDataRef.current = { id, name, password }; // formData 업데이트
       sessionStorage.setItem(id, formDataRef.current.id);
       sessionStorage.setItem(password, formDataRef.current.password);
+      sessionStorage.setItem(name, formDataRef.current.name);
       navigate("/login");
     }
   };

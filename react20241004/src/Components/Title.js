@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
-const Title = ({ setOpenModal, setReg, isLogin }) => {
+const Title = ({ setOpenModal, setReg, isLoginRef }) => {
   const location = useLocation();
+  console.log(isLoginRef);
   return (
     <div className="header">
       <div>
@@ -20,17 +21,17 @@ const Title = ({ setOpenModal, setReg, isLogin }) => {
           )}
         </div>
         <div className="sideMenu">
-          {isLogin === true && (
+          {isLoginRef === true && (
             <Link to={"/mypage"}>
               <label>마이페이지</label>
             </Link>
           )}
-          {isLogin === false && (
+          {isLoginRef === false && (
             <Link to={"/login"}>
               <label>로그인</label>
             </Link>
           )}
-          {isLogin === false && (
+          {isLoginRef === false && (
             <Link to={"/join"}>
               <label>회원가입</label>
             </Link>

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export function Login({ formDataRef, setIsLogin, isLogin }) {
+export function Login({ formDataRef, isLoginRef }) {
   const navigate = useNavigate();
   const formData = formDataRef.current;
 
@@ -13,7 +13,6 @@ export function Login({ formDataRef, setIsLogin, isLogin }) {
     const password = passwordRef.current.value;
     console.log(sessionStorage.getItem(id));
     console.log(sessionStorage.getItem(password));
-    sessionStorage.setItem(isLogin, true);
 
     if (
       id !== "" &&
@@ -21,7 +20,8 @@ export function Login({ formDataRef, setIsLogin, isLogin }) {
       id === sessionStorage.getItem(id) &&
       password === sessionStorage.getItem(password)
     ) {
-      setIsLogin(true);
+      sessionStorage.setItem(isLoginRef, true);
+      console.log(sessionStorage.getItem(isLoginRef));
       navigate("/foodList");
     } else {
       alert("아이디와 비밀번호를 확인하세요.");

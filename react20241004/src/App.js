@@ -96,7 +96,7 @@ function App() {
   const formDataRef = useRef({ id: "", name: "", password: "" });
 
   const [openModal, setOpenModal] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const isLoginRef = useRef(false);
   const [add, setAdd] = useState(true);
   const [reg, setReg] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -113,7 +113,7 @@ function App() {
         setReg={setReg}
         add={add}
         setAdd={setAdd}
-        isLogin={isLogin}
+        isLoginRef={isLoginRef}
       />
       <Routes>
         <Route
@@ -151,13 +151,7 @@ function App() {
         ></Route>
         <Route
           path="/login"
-          element={
-            <Login
-              formDataRef={formDataRef}
-              setIsLogin={setIsLogin}
-              isLogin={isLogin}
-            />
-          }
+          element={<Login formDataRef={formDataRef} isLoginRef={isLoginRef} />}
         />
         <Route path="/join" element={<Join formDataRef={formDataRef} />} />
         <Route
@@ -170,7 +164,7 @@ function App() {
               setCount={setCount}
               totalPrice={totalPrice}
               setTotalPrice={setTotalPrice}
-              isLogin={isLogin}
+              isLoginRef={isLoginRef}
             />
           }
         />
